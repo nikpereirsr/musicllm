@@ -1,0 +1,206 @@
+Metadata for: My_Workspace-Almost_(Not_Quite)_[Lyrical]-49e47425-2142-4855-8eb8-fb49f9cb876e.mp3
+Generated: 2026-03-12T07:01:03.147Z
+
+--- Track Information ---
+Title: Almost (Not Quite) [Lyrical]
+Artist: ¡ ,  N3f@ri0u$
+Year: 2026
+
+--- Musical Information ---
+
+--- Creation Details ---
+Prompt: Lyrical rap, 96 BPM, minor key. Dark piano + tense strings, heavy 808, crisp punchy drums, fast hi-hats. Tight, clear verse delivery with dense rhyme pockets, hook more melodic but still rhythmic. Pre-chorus lifts with lighter drums, bridge drops to sparse piano then rebuilds. Final chorus hits harder with added intensity and ad-libs.
+
+--- Lyrics ---
+[Verse 1]
+I don't know why I still love you, it's embarrassing,
+deep in my chest, still craving you, it's demanding.
+I walk through my city with a smile that's practiced,
+good in daylight, wrecked when the day passes.
+Got a girl who likes my "life," likes the shine, likes the look,
+likes the posts and the motion, not the price that it took.
+She thinks we good, but my smile is a cover,
+she don't know my mind stays fixed on another.
+I say I'm moving on, then I circle the block,
+running old scenes like I forgot how to stop.
+Hate that the truth is I still want you too,
+so I pray you don't call me drunk at two.
+'Cause if you called right now, I'd answer like a fool,
+act tough for a second, then I'm back in your pull.
+Never had a steady love, never had a mom to lean on,
+so I chased "don't leave" 'cause I feared a "Dear John."
+You saw every soft spot, knew where I would bend,
+that's why it was easy making our love pretend.
+Is that why you disappeared, is that why you'd betray?
+'Cause you knew you were the one thing I wouldn't throw away.
+
+[Pre-Chorus]
+You got me missing you and hating you, I'm impressed,
+I try to move forward, my heart starts to protest.
+I deleted our thread, now I stare at the screen,
+mind wants peace, but my heart wants to intervene.
+
+[Chorus]
+You were my "right there," I was your "not quite,"
+I swore you were the one, from the jump it felt right.
+I keep your pictures on my phone, replay your last words to me,
+hover over "trash," can't survive if I hit "delete."
+You said you'd ride or die, then you let our whole life burn,
+left me holding the ashes like it was my turn to learn.
+Where you at now, out healing or out having fun?
+I'm trying to say goodbye, but I believed you were the one.
+
+[Verse 2]
+Now you tell everybody I'm the villain in your story,
+like I woke up one day and chose to mine pain from your quarry.
+If you want the truth, I won't hide behind the mask,
+I don't gotta fake a thing, I can answer what you ask.
+I was pride and pressure, I was "prove it" and "be mine,"
+I made your freedom look suspicious, like your love was a crime.
+I didn't buy you peace, I bought control with little things,
+kept you close and called it loyalty, clipped off your wings.
+I called it protection, but it was fear in a suit,
+I needed you weaker so I could feel bulletproof.
+
+You'd cry in the spotlight, make my guilt do flips,
+then wake up and rewrite it like I made it all up.
+You'd say "forever," but always one foot out the door,
+I stayed stuck in the fairytale, ignoring what I saw.
+And still... you gave me years I can't stop replaying,
+little moments I hold tight when I'm sober and I'm shaking.
+I don't want revenge, I just want quiet in my head,
+but my thoughts run on repeat for the things I never said.
+You gave me warmth when I was cold and hard to reach,
+then you left and I learned silence is its own kind of speech.
+
+[Pre-Chorus 2]
+And I hate what you did, and I hate what I became,
+every time I compare her to you, I start to go insane.
+I laugh with someone new but always hear you instead,
+like I moved on outside but my mind stayed in our bed.
+
+[Chorus 2]
+You were my "right there," I was your "not quite,"
+I swore you were the one, but you claim it ain't right.
+I keep your pictures on my phone, replay your last words to me,
+hover over "trash," can't survive if I hit "delete."
+You said you'd ride or die, then you let our whole life burn,
+left me holding the ashes like it was my turn to learn.
+Where you at now, out healing or out having fun?
+I'm trying to say goodbye, but I believed you were the one.
+
+[Bridge]
+How I'm supposed to love you when I don't love who I am?
+How I'm supposed to give you all of me when I'm split in half?
+I'm a burning boat acting steady on the wave,
+so don't grab on when I'm sinking, I'll pull you to the grave.
+We had good days, I won't pretend they didn't happen,
+but I never saw it coming: you'd be my last assassin.
+Maybe we were meant to meet, just not meant to stay,
+some people teach you what you want by taking it away.
+
+[Final Chorus]
+Love ain't a rescue, trust ain't a home,
+it's a pretty little word when you're not alone.
+You were my "right there," I was your "not quite,"
+I tried to make it work, I tried to make it right.
+I keep your pictures on my phone, replay your last words to me,
+hover over "trash," can't survive if I hit "delete."
+You said you'd ride or die, then you let our whole life burn,
+left me holding the ashes like it was my turn to learn.
+Where you at now, out healing or out having fun?
+I'm trying to move on, but I still hope we ain't done.
+
+
+Cover Art URL: https://cdn2.suno.ai/image_49e47425-2142-4855-8eb8-fb49f9cb876e.jpeg
+
+--- Raw API Response ---
+{
+  "status": "complete",
+  "title": "Almost (Not Quite) [Lyrical]",
+  "play_count": 1,
+  "upvote_count": 0,
+  "allow_comments": true,
+  "id": "49e47425-2142-4855-8eb8-fb49f9cb876e",
+  "entity_type": "song_schema",
+  "video_url": "",
+  "audio_url": "https://cdn1.suno.ai/49e47425-2142-4855-8eb8-fb49f9cb876e.mp3",
+  "image_url": "https://cdn2.suno.ai/image_49e47425-2142-4855-8eb8-fb49f9cb876e.jpeg",
+  "image_large_url": "https://cdn2.suno.ai/image_large_49e47425-2142-4855-8eb8-fb49f9cb876e.jpeg",
+  "major_model_version": "v5",
+  "model_name": "chirp-crow",
+  "metadata": {
+    "tags": "Lyrical rap, 96 BPM, minor key. Dark piano + tense strings, heavy 808, crisp punchy drums, fast hi-hats. Tight, clear verse delivery with dense rhyme pockets, hook more melodic but still rhythmic. Pre-chorus lifts with lighter drums, bridge drops to sparse piano then rebuilds. Final chorus hits harder with added intensity and ad-libs.",
+    "prompt": "[Verse 1]\nI don't know why I still love you, it's embarrassing,\ndeep in my chest, still craving you, it's demanding.\nI walk through my city with a smile that's practiced,\ngood in daylight, wrecked when the day passes.\nGot a girl who likes my \"life,\" likes the shine, likes the look,\nlikes the posts and the motion, not the price that it took.\nShe thinks we good, but my smile is a cover,\nshe don't know my mind stays fixed on another.\nI say I'm moving on, then I circle the block,\nrunning old scenes like I forgot how to stop.\nHate that the truth is I still want you too,\nso I pray you don't call me drunk at two.\n'Cause if you called right now, I'd answer like a fool,\nact tough for a second, then I'm back in your pull.\nNever had a steady love, never had a mom to lean on,\nso I chased \"don't leave\" 'cause I feared a \"Dear John.\"\nYou saw every soft spot, knew where I would bend,\nthat's why it was easy making our love pretend.\nIs that why you disappeared, is that why you'd betray?\n'Cause you knew you were the one thing I wouldn't throw away.\n\n[Pre-Chorus]\nYou got me missing you and hating you, I'm impressed,\nI try to move forward, my heart starts to protest.\nI deleted our thread, now I stare at the screen,\nmind wants peace, but my heart wants to intervene.\n\n[Chorus]\nYou were my \"right there,\" I was your \"not quite,\"\nI swore you were the one, from the jump it felt right.\nI keep your pictures on my phone, replay your last words to me,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said you'd ride or die, then you let our whole life burn,\nleft me holding the ashes like it was my turn to learn.\nWhere you at now, out healing or out having fun?\nI'm trying to say goodbye, but I believed you were the one.\n\n[Verse 2]\nNow you tell everybody I'm the villain in your story,\nlike I woke up one day and chose to mine pain from your quarry.\nIf you want the truth, I won't hide behind the mask,\nI don't gotta fake a thing, I can answer what you ask.\nI was pride and pressure, I was \"prove it\" and \"be mine,\"\nI made your freedom look suspicious, like your love was a crime.\nI didn't buy you peace, I bought control with little things,\nkept you close and called it loyalty, clipped off your wings.\nI called it protection, but it was fear in a suit,\nI needed you weaker so I could feel bulletproof.\n\nYou'd cry in the spotlight, make my guilt do flips,\nthen wake up and rewrite it like I made it all up.\nYou'd say \"forever,\" but always one foot out the door,\nI stayed stuck in the fairytale, ignoring what I saw.\nAnd still... you gave me years I can't stop replaying,\nlittle moments I hold tight when I'm sober and I'm shaking.\nI don't want revenge, I just want quiet in my head,\nbut my thoughts run on repeat for the things I never said.\nYou gave me warmth when I was cold and hard to reach,\nthen you left and I learned silence is its own kind of speech.\n\n[Pre-Chorus 2]\nAnd I hate what you did, and I hate what I became,\nevery time I compare her to you, I start to go insane.\nI laugh with someone new but always hear you instead,\nlike I moved on outside but my mind stayed in our bed.\n\n[Chorus 2]\nYou were my \"right there,\" I was your \"not quite,\"\nI swore you were the one, but you claim it ain't right.\nI keep your pictures on my phone, replay your last words to me,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said you'd ride or die, then you let our whole life burn,\nleft me holding the ashes like it was my turn to learn.\nWhere you at now, out healing or out having fun?\nI'm trying to say goodbye, but I believed you were the one.\n\n[Bridge]\nHow I'm supposed to love you when I don't love who I am?\nHow I'm supposed to give you all of me when I'm split in half?\nI'm a burning boat acting steady on the wave,\nso don't grab on when I'm sinking, I'll pull you to the grave.\nWe had good days, I won't pretend they didn't happen,\nbut I never saw it coming: you'd be my last assassin.\nMaybe we were meant to meet, just not meant to stay,\nsome people teach you what you want by taking it away.\n\n[Final Chorus]\nLove ain't a rescue, trust ain't a home,\nit's a pretty little word when you're not alone.\nYou were my \"right there,\" I was your \"not quite,\"\nI tried to make it work, I tried to make it right.\nI keep your pictures on my phone, replay your last words to me,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said you'd ride or die, then you let our whole life burn,\nleft me holding the ashes like it was my turn to learn.\nWhere you at now, out healing or out having fun?\nI'm trying to move on, but I still hope we ain't done.\n",
+    "type": "gen",
+    "duration": 241.92,
+    "refund_credits": false,
+    "stream": true,
+    "make_instrumental": false,
+    "control_sliders": {
+      "style_weight": 0.79,
+      "weirdness_constraint": 0.08
+    },
+    "can_remix": true,
+    "is_remix": false,
+    "priority": 0,
+    "has_stem": false,
+    "uses_latest_model": true,
+    "model_badges": {
+      "songcard": {
+        "display_name": "v5",
+        "light": {
+          "text_color": "FD429C",
+          "background_color": "0000004D",
+          "border_color": "00000000"
+        },
+        "dark": {
+          "text_color": "FD429C",
+          "background_color": "0000004D",
+          "border_color": "00000000"
+        }
+      },
+      "songrow": {
+        "display_name": "v5",
+        "light": {
+          "text_color": "FD429C",
+          "background_color": "FD429C1A",
+          "border_color": "00000000"
+        },
+        "dark": {
+          "text_color": "FD429C",
+          "background_color": "FD429C40",
+          "border_color": "00000000"
+        }
+      }
+    }
+  },
+  "is_liked": false,
+  "user_id": "98f85b64-b50a-4360-be16-38f15101baf7",
+  "display_name": "¡ ,  N3f@ri0u$",
+  "handle": "nefarious3ntity666",
+  "is_handle_updated": true,
+  "avatar_image_url": "https://cdn2.suno.ai/558f1654-079a-4040-acfd-27692962430c.jpeg",
+  "is_trashed": false,
+  "is_hidden": false,
+  "created_at": "2026-02-18T20:15:17.811Z",
+  "is_public": false,
+  "reaction": {
+    "play_count": 1,
+    "skip_count": 0,
+    "flagged": false,
+    "clip": "49e47425-2142-4855-8eb8-fb49f9cb876e",
+    "updated_at": "2026-02-18T20:20:53.991Z"
+  },
+  "is_following_creator": false,
+  "ownership": {
+    "ownership_reason": "subscribed"
+  },
+  "explicit": false,
+  "comment_count": 0,
+  "flag_count": 0,
+  "display_tags": "hip hop",
+  "is_contest_clip": false,
+  "has_hook": false,
+  "batch_index": 1
+}

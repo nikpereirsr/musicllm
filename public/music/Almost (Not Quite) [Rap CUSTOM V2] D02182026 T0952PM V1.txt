@@ -1,0 +1,220 @@
+Metadata for: My_Workspace-Almost_(Not_Quite)_[Rap_CUSTOM_V2]-cf16da08-034c-4b4b-a717-56bf19b6cc04.mp3
+Generated: 2026-03-12T06:59:45.917Z
+
+--- Track Information ---
+Title: Almost (Not Quite)  [Rap  CUSTOM V2]
+Artist: ¡ ,  N3f@ri0u$
+Year: 2026
+
+--- Musical Information ---
+
+--- Creation Details ---
+Prompt: Modern white intelligent rap. 
+Verses are aggressive 16-bar rap with clear diction (no singing in verses). 
+Chorus is a short chantable rap hook with minimal melody. Bridge strips to piano then builds. 
+Final chorus hits harder with ad-libs. 
+Short rap tag before the outro.
+
+--- Lyrics ---
+[Verse 1] 
+(16 bars)
+I don't know why I still love you, it's sick, it's embarrassing,
+deep in my chest still craving you, the silence is deafening.
+I walk through my city with a smile that's practiced,
+good in daylight, wrecked when the day passes.
+Got a girl that likes my "life," likes the shine and the snapshot,
+likes the posts and the motion, never counted what that cost.
+She thinks we good, but my face is a mask when we talk,
+'cause my mind stays parked on your name like a locked box.
+I say I'm moving on, then I circle the same four corners,
+replaying old scenes like my mind is a TiVo recorder.
+Hate that I still want you close but I've been acting phony,
+so I pray you don't call me at two when you're drunk and you're lonely.
+'Cause if you call right now, I'm weak, I pick up too quick,
+act tough for a second, then I fold and I slip.
+Never had steady love, never had nobody to lean on,
+so I stayed in that chase scene like a Tom and Jerry rerun.
+
+[Pre-Chorus]
+You got me missing you and hating you, it's deadly,
+I step forward, my heart yanks back, the world gets heavy.
+Deleted our thread, now I'm stuck in the hurt,
+my mind gets peace when this love's six feet in the dirt.
+
+[Chorus] 
+(short rap hook)
+You were my "right there," I was your "not quite,"
+swore you were the one, yeah, that first night felt right.
+Pictures on my phone got my head on repeat,
+hover over "trash," can't survive if I hit "delete."
+You said "ride or die," then you dipped at the worst,
+left me with the smoke and the lesson in the dirt.
+Where you at now, healing up or having fun?
+I'm tryna say goodbye, but I believed you were the one.
+
+[Verse 2] 
+(16 bars)
+Now you tell everybody I'm the villain in your version,
+like I woke up and chose to be cruel on purpose.
+If you want the truth, I won't duck it, won't dodge it,
+I don't gotta fake a thing, I'll say it and own it.
+I was pride and pressure, "prove it," "be mine,"
+turned your freedom suspicious like loving me was a crime.
+Didn't buy you peace, I bought control in small signs,
+kept you close, called it loyalty, clipped your ability to fly.
+Called it protection, but it was fear in a suit,
+I needed you weaker just to feel bulletproof.
+You'd cry in the spotlight, make my guilt do loops,
+then wake up and rewrite it, leave my memories in dispute.
+You'd say "forever" with one foot out the door,
+I stayed in the fairytale, ignored what I saw.
+And still... I replay it like I got no off switch,
+I don't want revenge, I want quiet, I want my life back.
+
+[Pre-Chorus 2]
+And I hate what you did, and I hate what I became,
+every time I compare her to you, I go insane.
+I laugh with someone new but always hear you instead,
+like I moved on outside but my mind stayed in our bed.
+
+[Chorus 2] 
+(short rap hook)
+You were my "right there," I was your "not quite,"
+swore you were the one, yeah, that first night felt right.
+Pictures on my phone got my head on repeat,
+hover over "trash," can't survive if I hit "delete."
+You said "ride or die," then you dipped at the worst,
+left me with the smoke and the lesson in the dirt.
+Where you at now, healing up or having fun?
+I'm tryna say goodbye, but I believed you were the one.
+
+[Bridge] 
+(emotional release)
+How I'm supposed to love you when I don't love who I am?
+How I'm supposed to give you all of me when I'm not your man?
+I called it "protecting us," but it was panic in disguise,
+I was dodging all your questions, looking you dead in the eyes.
+And you played your part too, that back-and-forth, that switch,
+make me feel guilty for reacting, then say I'm the one that slipped.
+We had good days, I won't pretend they didn't happen,
+but the same hands that held me were the ones that did the damage.
+Maybe we were meant to meet, just not meant to stay,
+some people teach you what you want by taking it away.
+Now I'm trying to be better, but the guilt keeps score,
+every "lesson learned" feels like I'm kicking my own door.
+
+[Final Pre-Chorus]
+Love ain't a rescue, trust ain't a home,
+it's a pretty little word when you're not alone.
+
+[Final Chorus] 
+(harder delivery)
+You were my "right there," I was your "not quite,"
+I tried to make it work, I tried to make it right.
+Pictures on my phone got my head on repeat,
+hover over "trash," can't survive if I hit "delete."
+You said "ride or die," then you dipped at the worst,
+left me with the smoke and the lesson in the dirt.
+Where you at now, healing up or having fun?
+I'm tryna move on, but I still hope we ain't done.
+
+[Tag] 
+(short, rap)
+Right there, not quite, stuck in the same frame,
+I cut you off, then I check for your name.
+New face beside me, but my head in the past,
+I'm learning closure ain't a button you can tap.
+
+[Outro] 
+(spoken)
+Same streets, same smoke, new future, old ghosts.
+Phone face-down, still loud in my head.
+I'm not asking for you back.
+I'm asking for the end
+
+
+Cover Art URL: https://cdn2.suno.ai/image_cf16da08-034c-4b4b-a717-56bf19b6cc04.jpeg
+
+--- Raw API Response ---
+{
+  "status": "complete",
+  "title": "Almost (Not Quite)  [Rap  CUSTOM V2]",
+  "play_count": 0,
+  "upvote_count": 0,
+  "allow_comments": true,
+  "id": "cf16da08-034c-4b4b-a717-56bf19b6cc04",
+  "entity_type": "song_schema",
+  "video_url": "",
+  "audio_url": "https://cdn1.suno.ai/cf16da08-034c-4b4b-a717-56bf19b6cc04.mp3",
+  "image_url": "https://cdn2.suno.ai/image_cf16da08-034c-4b4b-a717-56bf19b6cc04.jpeg",
+  "image_large_url": "https://cdn2.suno.ai/image_large_cf16da08-034c-4b4b-a717-56bf19b6cc04.jpeg",
+  "major_model_version": "v5",
+  "model_name": "chirp-crow",
+  "metadata": {
+    "tags": "Modern white intelligent rap. \nVerses are aggressive 16-bar rap with clear diction (no singing in verses). \nChorus is a short chantable rap hook with minimal melody. Bridge strips to piano then builds. \nFinal chorus hits harder with ad-libs. \nShort rap tag before the outro.",
+    "prompt": "[Verse 1] \n(16 bars)\nI don't know why I still love you, it's sick, it's embarrassing,\ndeep in my chest still craving you, the silence is deafening.\nI walk through my city with a smile that's practiced,\ngood in daylight, wrecked when the day passes.\nGot a girl that likes my \"life,\" likes the shine and the snapshot,\nlikes the posts and the motion, never counted what that cost.\nShe thinks we good, but my face is a mask when we talk,\n'cause my mind stays parked on your name like a locked box.\nI say I'm moving on, then I circle the same four corners,\nreplaying old scenes like my mind is a TiVo recorder.\nHate that I still want you close but I've been acting phony,\nso I pray you don't call me at two when you're drunk and you're lonely.\n'Cause if you call right now, I'm weak, I pick up too quick,\nact tough for a second, then I fold and I slip.\nNever had steady love, never had nobody to lean on,\nso I stayed in that chase scene like a Tom and Jerry rerun.\n\n[Pre-Chorus]\nYou got me missing you and hating you, it's deadly,\nI step forward, my heart yanks back, the world gets heavy.\nDeleted our thread, now I'm stuck in the hurt,\nmy mind gets peace when this love's six feet in the dirt.\n\n[Chorus] \n(short rap hook)\nYou were my \"right there,\" I was your \"not quite,\"\nswore you were the one, yeah, that first night felt right.\nPictures on my phone got my head on repeat,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said \"ride or die,\" then you dipped at the worst,\nleft me with the smoke and the lesson in the dirt.\nWhere you at now, healing up or having fun?\nI'm tryna say goodbye, but I believed you were the one.\n\n[Verse 2] \n(16 bars)\nNow you tell everybody I'm the villain in your version,\nlike I woke up and chose to be cruel on purpose.\nIf you want the truth, I won't duck it, won't dodge it,\nI don't gotta fake a thing, I'll say it and own it.\nI was pride and pressure, \"prove it,\" \"be mine,\"\nturned your freedom suspicious like loving me was a crime.\nDidn't buy you peace, I bought control in small signs,\nkept you close, called it loyalty, clipped your ability to fly.\nCalled it protection, but it was fear in a suit,\nI needed you weaker just to feel bulletproof.\nYou'd cry in the spotlight, make my guilt do loops,\nthen wake up and rewrite it, leave my memories in dispute.\nYou'd say \"forever\" with one foot out the door,\nI stayed in the fairytale, ignored what I saw.\nAnd still... I replay it like I got no off switch,\nI don't want revenge, I want quiet, I want my life back.\n\n[Pre-Chorus 2]\nAnd I hate what you did, and I hate what I became,\nevery time I compare her to you, I go insane.\nI laugh with someone new but always hear you instead,\nlike I moved on outside but my mind stayed in our bed.\n\n[Chorus 2] \n(short rap hook)\nYou were my \"right there,\" I was your \"not quite,\"\nswore you were the one, yeah, that first night felt right.\nPictures on my phone got my head on repeat,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said \"ride or die,\" then you dipped at the worst,\nleft me with the smoke and the lesson in the dirt.\nWhere you at now, healing up or having fun?\nI'm tryna say goodbye, but I believed you were the one.\n\n[Bridge] \n(emotional release)\nHow I'm supposed to love you when I don't love who I am?\nHow I'm supposed to give you all of me when I'm not your man?\nI called it \"protecting us,\" but it was panic in disguise,\nI was dodging all your questions, looking you dead in the eyes.\nAnd you played your part too, that back-and-forth, that switch,\nmake me feel guilty for reacting, then say I'm the one that slipped.\nWe had good days, I won't pretend they didn't happen,\nbut the same hands that held me were the ones that did the damage.\nMaybe we were meant to meet, just not meant to stay,\nsome people teach you what you want by taking it away.\nNow I'm trying to be better, but the guilt keeps score,\nevery \"lesson learned\" feels like I'm kicking my own door.\n\n[Final Pre-Chorus]\nLove ain't a rescue, trust ain't a home,\nit's a pretty little word when you're not alone.\n\n[Final Chorus] \n(harder delivery)\nYou were my \"right there,\" I was your \"not quite,\"\nI tried to make it work, I tried to make it right.\nPictures on my phone got my head on repeat,\nhover over \"trash,\" can't survive if I hit \"delete.\"\nYou said \"ride or die,\" then you dipped at the worst,\nleft me with the smoke and the lesson in the dirt.\nWhere you at now, healing up or having fun?\nI'm tryna move on, but I still hope we ain't done.\n\n[Tag] \n(short, rap)\nRight there, not quite, stuck in the same frame,\nI cut you off, then I check for your name.\nNew face beside me, but my head in the past,\nI'm learning closure ain't a button you can tap.\n\n[Outro] \n(spoken)\nSame streets, same smoke, new future, old ghosts.\nPhone face-down, still loud in my head.\nI'm not asking for you back.\nI'm asking for the end\n",
+    "type": "gen",
+    "duration": 84.96,
+    "refund_credits": false,
+    "stream": true,
+    "make_instrumental": false,
+    "control_sliders": {
+      "style_weight": 0.81,
+      "weirdness_constraint": 0.08
+    },
+    "can_remix": true,
+    "is_remix": false,
+    "priority": 0,
+    "has_stem": false,
+    "uses_latest_model": true,
+    "model_badges": {
+      "songcard": {
+        "display_name": "v5",
+        "light": {
+          "text_color": "FD429C",
+          "background_color": "0000004D",
+          "border_color": "00000000"
+        },
+        "dark": {
+          "text_color": "FD429C",
+          "background_color": "0000004D",
+          "border_color": "00000000"
+        }
+      },
+      "songrow": {
+        "display_name": "v5",
+        "light": {
+          "text_color": "FD429C",
+          "background_color": "FD429C1A",
+          "border_color": "00000000"
+        },
+        "dark": {
+          "text_color": "FD429C",
+          "background_color": "FD429C40",
+          "border_color": "00000000"
+        }
+      }
+    }
+  },
+  "is_liked": false,
+  "user_id": "98f85b64-b50a-4360-be16-38f15101baf7",
+  "display_name": "¡ ,  N3f@ri0u$",
+  "handle": "nefarious3ntity666",
+  "is_handle_updated": true,
+  "avatar_image_url": "https://cdn2.suno.ai/558f1654-079a-4040-acfd-27692962430c.jpeg",
+  "is_trashed": false,
+  "is_hidden": false,
+  "created_at": "2026-02-18T21:52:11.530Z",
+  "is_public": false,
+  "is_following_creator": false,
+  "ownership": {
+    "ownership_reason": "subscribed"
+  },
+  "explicit": false,
+  "comment_count": 0,
+  "flag_count": 0,
+  "display_tags": "hip hop, rap",
+  "is_contest_clip": false,
+  "has_hook": false,
+  "batch_index": 0
+}

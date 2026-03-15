@@ -143,14 +143,31 @@
     .ctrl.active { color: var(--primary2); }
     .vol-slider { width: 68px; accent-color: var(--primary); cursor: pointer; }
 
-    /* Panels grid */
-    .panels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    /* Panels layout */
+    .panels-grid { display: flex; flex-direction: column; gap: 12px; }
+    .panel-row { display: flex; gap: 12px; }
     .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
     .panel-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
     .meta-table { width: 100%; border-collapse: collapse; }
     .meta-table td { padding: 3px 0; font-size: 12px; vertical-align: top; }
     .meta-table td:first-child { color: var(--muted); width: 46%; padding-right: 8px; }
     .meta-table td:last-child { color: var(--text); font-weight: 500; }
+
+    /* Row 1: hero (40%) + lyrics (60%) */
+    .row1 { align-items: stretch; }
+    .row1-hero { flex: 0 0 40%; min-width: 0; }
+    .row1-lyrics { flex: 0 0 calc(60% - 12px); min-width: 0; }
+    .lyrics-text { font-size: 13px; line-height: 1.9; color: var(--text); white-space: pre-wrap; height: 100%; max-height: 240px; overflow-y: auto; }
+    .lyrics-text::-webkit-scrollbar { width: 4px; }
+    .lyrics-text::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    /* Row 2: track details (50%) + engagement (50%) */
+    .row2-track { flex: 1; min-width: 0; }
+    .row2-engagement { flex: 1; min-width: 0; }
+
+    /* Row 3: generation details + mood tags */
+    .row3-gen { flex: 1; min-width: 0; }
+    .row3-mood { flex: 1; min-width: 0; }
 
     /* Slider bars */
     .slider-bar-wrap { margin-top: 10px; }
@@ -159,16 +176,10 @@
     .slider-bar-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 0.4s; }
 
     /* Engagement */
-    .engagement-row { display: flex; gap: 8px; }
-    .eng-card { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+    .engagement-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .eng-card { flex: 1; min-width: 80px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
     .eng-val { font-size: 20px; font-weight: 800; color: var(--primary2); }
     .eng-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; margin-top: 2px; }
-
-    /* Lyrics */
-    .lyrics-panel { grid-column: 1 / -1; }
-    .lyrics-text { font-size: 13px; line-height: 1.9; color: var(--text); white-space: pre-wrap; max-height: 220px; overflow-y: auto; }
-    .lyrics-text::-webkit-scrollbar { width: 4px; }
-    .lyrics-text::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
     /* Mini player */
     .mini-player { grid-area: player; background: var(--surface); border-top: 1px solid var(--border); padding: 0 20px; display: flex; align-items: center; gap: 14px; }
@@ -215,89 +226,94 @@
 
   <main class="main">
 
-    <!-- Hero / Now Playing -->
-    <div class="hero">
-      <div class="hero-cover-wrap">
-        <div class="hero-cover-ph" id="heroCoverPh">🎵</div>
-        <img class="hero-cover" id="heroCover" style="display:none" alt="Cover Art" />
-        <div class="remix-badge" id="remixBadge" style="display:none">REMIX</div>
-      </div>
-      <div class="hero-info">
-        <div class="np-label">Now Playing</div>
-        <div class="np-title" id="npTitle">Select a song</div>
-        <div class="np-artist-row">
-          <img class="np-avatar" id="npAvatar" style="display:none" alt="" />
-          <span class="np-artist-name" id="npArtistName">—</span>
-          <span class="np-artist-handle" id="npArtistHandle"></span>
+    <!-- Row 1: Now Playing (40%) + Lyrics (60%) -->
+    <div class="panel-row row1">
+
+      <!-- Now Playing / Hero -->
+      <div class="panel row1-hero hero">
+        <div class="hero-cover-wrap">
+          <div class="hero-cover-ph" id="heroCoverPh">🎵</div>
+          <img class="hero-cover" id="heroCover" style="display:none" alt="Cover Art" />
+          <div class="remix-badge" id="remixBadge" style="display:none">REMIX</div>
         </div>
-        <div class="tags-row" id="npTags"></div>
-        <div>
-          <div class="progress-wrap" id="progressWrap">
-            <div class="progress-fill" id="progressFill" style="width:0%"></div>
-            <div class="progress-thumb" id="progressThumb" style="left:0%"></div>
+        <div class="hero-info">
+          <div class="np-label">Now Playing</div>
+          <div class="np-title" id="npTitle">Select a song</div>
+          <div class="np-artist-row">
+            <img class="np-avatar" id="npAvatar" style="display:none" alt="" />
+            <span class="np-artist-name" id="npArtistName">—</span>
+            <span class="np-artist-handle" id="npArtistHandle"></span>
           </div>
-          <div class="progress-times">
-            <span id="timeElapsed">0:00</span>
-            <span id="timeDuration">0:00</span>
+          <div class="tags-row" id="npTags"></div>
+          <div>
+            <div class="progress-wrap" id="progressWrap">
+              <div class="progress-fill" id="progressFill" style="width:0%"></div>
+              <div class="progress-thumb" id="progressThumb" style="left:0%"></div>
+            </div>
+            <div class="progress-times">
+              <span id="timeElapsed">0:00</span>
+              <span id="timeDuration">0:00</span>
+            </div>
+          </div>
+          <div class="controls">
+            <button class="ctrl" id="btnShuffle" title="Shuffle" onclick="toggleShuffle()">🔀</button>
+            <button class="ctrl" onclick="prevSong()">⏮</button>
+            <button class="ctrl play-btn" id="btnPlay" onclick="togglePlay()">▶</button>
+            <button class="ctrl" onclick="nextSong()">⏭</button>
+            <button class="ctrl" id="btnRepeat" title="Repeat" onclick="toggleRepeat()">🔁</button>
+            <input type="range" class="vol-slider" min="0" max="1" step="0.02" value="0.8" oninput="setVol(this.value)" title="Volume" />
           </div>
         </div>
-        <div class="controls">
-          <button class="ctrl" id="btnShuffle" title="Shuffle" onclick="toggleShuffle()">🔀</button>
-          <button class="ctrl" onclick="prevSong()">⏮</button>
-          <button class="ctrl play-btn" id="btnPlay" onclick="togglePlay()">▶</button>
-          <button class="ctrl" onclick="nextSong()">⏭</button>
-          <button class="ctrl" id="btnRepeat" title="Repeat" onclick="toggleRepeat()">🔁</button>
-          <input type="range" class="vol-slider" min="0" max="1" step="0.02" value="0.8" oninput="setVol(this.value)" title="Volume" />
-        </div>
       </div>
+
+      <!-- Lyrics -->
+      <div class="panel row1-lyrics" id="lyricsPanel">
+        <div class="panel-title">Lyrics</div>
+        <div class="lyrics-text" id="lyricsText">Select a song to see lyrics.</div>
+      </div>
+
     </div>
 
     <!-- Metadata panels (shown after song selected) -->
     <div class="panels-grid" id="metaPanels" style="display:none">
 
-      <!-- Track Details -->
-      <div class="panel">
-        <div class="panel-title">Track Details</div>
-        <table class="meta-table" id="trackTable"></table>
-      </div>
-
-      <!-- Generation Details -->
-      <div class="panel">
-        <div class="panel-title">Generation Details</div>
-        <table class="meta-table" id="genTable"></table>
-        <div id="slidersWrap" style="display:none">
-          <div class="slider-bar-wrap">
-            <div class="slider-bar-label"><span>Style Weight</span><span id="styleWeightVal">—</span></div>
-            <div class="slider-bar-track"><div class="slider-bar-fill" id="styleWeightBar" style="width:0%"></div></div>
-          </div>
-          <div class="slider-bar-wrap">
-            <div class="slider-bar-label"><span>Weirdness</span><span id="weirdnessVal">—</span></div>
-            <div class="slider-bar-track"><div class="slider-bar-fill" id="weirdnessBar" style="width:0%;background:var(--warning)"></div></div>
+      <!-- Row 2: Track Details (50%) + Engagement (50%) -->
+      <div class="panel-row">
+        <div class="panel row2-track">
+          <div class="panel-title">Track Details</div>
+          <table class="meta-table" id="trackTable"></table>
+        </div>
+        <div class="panel row2-engagement">
+          <div class="panel-title">Engagement</div>
+          <div class="engagement-row">
+            <div class="eng-card"><div class="eng-val" id="engPlays">0</div><div class="eng-lbl">Plays</div></div>
+            <div class="eng-card"><div class="eng-val" id="engSkips">0</div><div class="eng-lbl">Skips</div></div>
+            <div class="eng-card"><div class="eng-val" id="engUpvotes">0</div><div class="eng-lbl">Upvotes</div></div>
+            <div class="eng-card"><div class="eng-val" id="engComments">0</div><div class="eng-lbl">Comments</div></div>
           </div>
         </div>
       </div>
 
-      <!-- Engagement -->
-      <div class="panel">
-        <div class="panel-title">Engagement</div>
-        <div class="engagement-row">
-          <div class="eng-card"><div class="eng-val" id="engPlays">0</div><div class="eng-lbl">Plays</div></div>
-          <div class="eng-card"><div class="eng-val" id="engSkips">0</div><div class="eng-lbl">Skips</div></div>
-          <div class="eng-card"><div class="eng-val" id="engUpvotes">0</div><div class="eng-lbl">Upvotes</div></div>
-          <div class="eng-card"><div class="eng-val" id="engComments">0</div><div class="eng-lbl">Comments</div></div>
+      <!-- Row 3: Generation Details + Mood & Style Tags -->
+      <div class="panel-row">
+        <div class="panel row3-gen">
+          <div class="panel-title">Generation Details</div>
+          <table class="meta-table" id="genTable"></table>
+          <div id="slidersWrap" style="display:none">
+            <div class="slider-bar-wrap">
+              <div class="slider-bar-label"><span>Style Weight</span><span id="styleWeightVal">—</span></div>
+              <div class="slider-bar-track"><div class="slider-bar-fill" id="styleWeightBar" style="width:0%"></div></div>
+            </div>
+            <div class="slider-bar-wrap">
+              <div class="slider-bar-label"><span>Weirdness</span><span id="weirdnessVal">—</span></div>
+              <div class="slider-bar-track"><div class="slider-bar-fill" id="weirdnessBar" style="width:0%;background:var(--warning)"></div></div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <!-- Mood & Style Tags -->
-      <div class="panel">
-        <div class="panel-title">Mood &amp; Style Tags</div>
-        <div id="moodTagsWrap" class="tags-row" style="gap:5px;flex-wrap:wrap"></div>
-      </div>
-
-      <!-- Lyrics (full width) -->
-      <div class="panel lyrics-panel" id="lyricsPanel" style="display:none">
-        <div class="panel-title">Lyrics</div>
-        <div class="lyrics-text" id="lyricsText"></div>
+        <div class="panel row3-mood">
+          <div class="panel-title">Mood &amp; Style Tags</div>
+          <div id="moodTagsWrap" class="tags-row" style="gap:5px;flex-wrap:wrap"></div>
+        </div>
       </div>
 
     </div>
@@ -402,7 +418,7 @@ function selectSong(idx) {
   if (s.modelVersion) tagsEl.innerHTML += `<span class="tag">${esc(s.modelVersion)}</span>`;
 
   document.getElementById('timeDuration').textContent = fmtTime(s.duration);
-  document.getElementById('metaPanels').style.display = 'grid';
+  document.getElementById('metaPanels').style.display = 'flex';
 
   // Track details
   const created = s.createdAt
@@ -448,11 +464,9 @@ function selectSong(idx) {
   document.getElementById('moodTagsWrap').innerHTML =
     (s.allTags||[]).map(t => `<span class="tag mood">${esc(t)}</span>`).join('');
 
-  // Lyrics
-  const lp = document.getElementById('lyricsPanel');
+  // Lyrics (panel is always visible in row 1)
   const lt = document.getElementById('lyricsText');
-  if (s.lyrics && s.lyrics.trim()) { lp.style.display='block'; lt.textContent = s.lyrics; }
-  else { lp.style.display='none'; }
+  lt.textContent = (s.lyrics && s.lyrics.trim()) ? s.lyrics : 'No lyrics available for this song.';
 
   // Mini player
   document.getElementById('miniTitle').textContent = s.title;

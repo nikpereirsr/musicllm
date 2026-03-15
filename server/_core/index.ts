@@ -71,6 +71,16 @@ async function startServer() {
     },
   }));
 
+  // Serve the player demo page
+  app.get("/demo", (_req, res) => {
+    const demoFile = path.join(publicDir, "demo.html");
+    if (fs.existsSync(demoFile)) {
+      res.sendFile(demoFile);
+    } else {
+      res.status(404).send("Demo page not found");
+    }
+  });
+
   // Serve songs.json
   app.get("/api/songs", (_req, res) => {
     const songsFile = path.join(publicDir, "songs.json");

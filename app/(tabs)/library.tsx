@@ -12,7 +12,8 @@ import {
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 import { useSongs, type Song } from "@/hooks/use-songs";
 import { usePlayer } from "@/lib/player-context";
 
@@ -30,6 +31,14 @@ export default function LibraryScreen() {
   const { playSong, currentSong, isPlaying, togglePlayPause } = usePlayer();
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"title" | "artist" | "genre">("title");
+
+  // Refresh songs whenever the Library tab comes into focus
+  // (e.g. after syncing a library in Settings)
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [refresh])
+  );
 
   const filteredSongs = useMemo(() => {
     let filtered = songs.filter(

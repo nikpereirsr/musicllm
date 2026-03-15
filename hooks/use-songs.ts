@@ -32,8 +32,11 @@ export function useSongs() {
       const allSongsData = await AsyncStorage.getItem("all_songs");
       const sshSongs: Song[] = allSongsData ? JSON.parse(allSongsData) : [];
       
-      // Filter out any local songs that might be in AsyncStorage to avoid duplicates
-      const filteredSshSongs = sshSongs.filter(s => s.source === "ssh");
+      // Accept songs that have source:"ssh" OR whose id starts with "ssh-" (legacy fallback)
+      // This ensures songs synced before the source field was added still appear.
+      const filteredSshSongs = sshSongs.filter(
+        (s) => s.source === "ssh" || (s.id && s.id.startsWith("ssh-"))
+      );
 
       // 3. Merge and set
       const merged = [...localSongs, ...filteredSshSongs];

@@ -181,16 +181,23 @@ export default function SettingsScreen() {
 
         // Store songs in AsyncStorage
         if (result.songs) {
+          // Ensure every synced song has source:"ssh" so use-songs.ts can find them
+          const songsWithSource = result.songs.map((s: any) => ({
+            ...s,
+            source: "ssh" as const,
+          }));
+
           await AsyncStorage.setItem(
             `library_songs_${library.id}`,
-            JSON.stringify(result.songs)
+            JSON.stringify(songsWithSource)
           );
+
           // Also store in a global songs key for other screens
           const existingSongs = await AsyncStorage.getItem("all_songs");
           const existing = existingSongs ? JSON.parse(existingSongs) : [];
-          // Remove old songs from this library
-          const filtered = existing.filter((s: any) => !s.id.startsWith(`ssh-`));
-          const merged = [...filtered, ...result.songs];
+          // Remove old songs from this library before re-adding
+          const filtered = existing.filter((s: any) => !s.id?.startsWith("ssh-"));
+          const merged = [...filtered, ...songsWithSource];
           await AsyncStorage.setItem("all_songs", JSON.stringify(merged));
         }
       } else {

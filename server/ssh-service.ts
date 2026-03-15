@@ -89,7 +89,7 @@ export class SSHService {
   }
 
   /**
-   * Test SSH connection
+   * Test SSH connection — reports the number of MP3 files found (not combined mp3+txt)
    */
   async testConnection(): Promise<{ success: boolean; message: string; fileCount?: number }> {
     let conn: Client | null = null;
@@ -99,15 +99,14 @@ export class SSHService {
       const sftp = result.sftp;
 
       const files = await this.readDir(sftp, this.config.path);
-      const musicFiles = files.filter(
-        (f) => f.filename.endsWith(".mp3") || f.filename.endsWith(".txt")
-      );
+      const mp3Count = files.filter((f) => f.filename.endsWith(".mp3")).length;
+      const txtCount = files.filter((f) => f.filename.endsWith(".txt")).length;
 
       conn.end();
       return {
         success: true,
-        message: `Connection successful! Found ${musicFiles.length} music files.`,
-        fileCount: musicFiles.length,
+        message: `Connection successful! Found ${mp3Count} songs (${txtCount} with metadata).`,
+        fileCount: mp3Count,
       };
     } catch (error) {
       if (conn) conn.end();
@@ -119,7 +118,8 @@ export class SSHService {
   }
 
   /**
-   * List all music files and match MP3s with their TXT metadata files
+   * List all music files and match MP3s with their TXT metadata files.
+   * Uses bidirectional name matching to handle both exact and prefix matches.
    */
   async listMusicFiles(): Promise<{
     success: boolean;
@@ -142,8 +142,7 @@ export class SSHService {
         .map((f) => f.filename);
 
       const musicFiles = mp3Files.map((mp3) => {
-        const baseName = mp3.replace(".mp3", "");
-        const txtFile = txtFiles.find((txt) => txt.startsWith(baseName));
+        const txtFile = matchTxtForMp3(mp3, txtFiles);
         return { mp3, txt: txtFile };
       });
 
@@ -164,8 +163,9 @@ export class SSHService {
   }
 
   /**
-   * Sync library - list files AND read all metadata in a SINGLE connection
-   * This avoids opening hundreds of separate SSH connections.
+   * Sync library — list files AND read all metadata in a SINGLE connection.
+   * FIX: adds source: "ssh" to every song so use-songs.ts can find them.
+   * FIX: improved txt matching (bidirectional prefix), lyrics parsing, duration, cover art.
    */
   async syncLibraryFull(): Promise<{
     success: boolean;
@@ -179,6 +179,7 @@ export class SSHService {
       lyrics: string;
       coverArtUrl?: string;
       fileName: string;
+      source: "ssh";
       isCached: boolean;
     }>;
     message: string;
@@ -204,12 +205,14 @@ export class SSHService {
 
       console.log(`[SSH] Found ${mp3Files.length} MP3 files and ${txtFiles.length} TXT files`);
 
-      // Step 2: Match MP3s with TXT files
+      // Step 2: Match MP3s with TXT files using improved bidirectional matching
       const musicFiles = mp3Files.map((mp3) => {
-        const baseName = mp3.replace(".mp3", "");
-        const txtFile = txtFiles.find((txt) => txt.startsWith(baseName));
+        const txtFile = matchTxtForMp3(mp3, txtFiles);
         return { mp3, txt: txtFile };
       });
+
+      const matchedCount = musicFiles.filter((f) => f.txt).length;
+      console.log(`[SSH] Matched ${matchedCount}/${mp3Files.length} MP3s with TXT metadata`);
 
       // Step 3: Read metadata from TXT files using the SAME connection
       const songs: Array<{
@@ -222,16 +225,17 @@ export class SSHService {
         lyrics: string;
         coverArtUrl?: string;
         fileName: string;
+        source: "ssh";
         isCached: boolean;
       }> = [];
 
       // Process files in batches of 5 to avoid overwhelming the connection
       const BATCH_SIZE = 5;
       const filesWithTxt = musicFiles.filter((f) => f.txt);
-      
+
       for (let i = 0; i < filesWithTxt.length; i += BATCH_SIZE) {
         const batch = filesWithTxt.slice(i, i + BATCH_SIZE);
-        
+
         const batchResults = await Promise.allSettled(
           batch.map(async (file) => {
             try {
@@ -257,7 +261,7 @@ export class SSHService {
 
               songs.push({
                 id: `ssh-${file.mp3}`,
-                title: metadata.title || file.mp3.replace(".mp3", ""),
+                title: metadata.title || cleanFileName(file.mp3),
                 artist: metadata.artist || "Unknown Artist",
                 year: metadata.year,
                 genre,
@@ -265,6 +269,8 @@ export class SSHService {
                 lyrics: metadata.lyrics || "",
                 coverArtUrl: metadata.coverArtUrl,
                 fileName: file.mp3,
+                // ✅ FIX: always set source so use-songs.ts can find these songs
+                source: "ssh",
                 isCached: false,
               });
             } catch (error) {
@@ -276,23 +282,19 @@ export class SSHService {
         console.log(`[SSH] Processed ${Math.min(i + BATCH_SIZE, filesWithTxt.length)}/${filesWithTxt.length} files`);
       }
 
-      // Also add MP3s without metadata
+      // Also add MP3s without a matching TXT file
       for (const file of musicFiles) {
         if (!file.txt) {
-          const cleanName = file.mp3
-            .replace(".mp3", "")
-            .replace(/D\d{8}\s*T\d{4}[AP]M/g, "")
-            .replace(/\s*V\d+\s*$/, "")
-            .trim();
-
           songs.push({
             id: `ssh-${file.mp3}`,
-            title: cleanName || file.mp3.replace(".mp3", ""),
+            title: cleanFileName(file.mp3),
             artist: "Unknown Artist",
             genre: "Uncategorized",
             duration: 0,
             lyrics: "",
             fileName: file.mp3,
+            // ✅ FIX: source field required
+            source: "ssh",
             isCached: false,
           });
         }
@@ -346,8 +348,61 @@ export class SSHService {
   }
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
 /**
- * Parse metadata from Suno AI format TXT file content
+ * Match a TXT metadata file to an MP3 file using bidirectional prefix matching.
+ * Handles cases where:
+ *   - txt and mp3 share the exact same base name (most common)
+ *   - txt name is shorter than mp3 name (e.g. "Song Title.txt" for "Song Title D03152025.mp3")
+ *   - txt name is longer than mp3 name (e.g. "Song Title [Tag].txt" for "Song Title.mp3")
+ */
+function matchTxtForMp3(mp3: string, txtFiles: string[]): string | undefined {
+  const baseName = mp3.replace(/\.mp3$/i, "");
+  const baseNameLower = baseName.toLowerCase();
+
+  // 1. Exact match (most reliable)
+  const exact = txtFiles.find(
+    (txt) => txt.replace(/\.txt$/i, "").toLowerCase() === baseNameLower
+  );
+  if (exact) return exact;
+
+  // 2. txt starts with mp3 base name (txt has extra suffix)
+  const txtHasSuffix = txtFiles.find((txt) =>
+    txt.toLowerCase().startsWith(baseNameLower + " ") ||
+    txt.toLowerCase().startsWith(baseNameLower + ".")
+  );
+  if (txtHasSuffix) return txtHasSuffix;
+
+  // 3. mp3 base name starts with txt base name (mp3 has extra suffix like date stamp)
+  const mp3HasSuffix = txtFiles.find((txt) => {
+    const txtBase = txt.replace(/\.txt$/i, "").toLowerCase();
+    return baseNameLower.startsWith(txtBase + " ") || baseNameLower.startsWith(txtBase + ".");
+  });
+  if (mp3HasSuffix) return mp3HasSuffix;
+
+  return undefined;
+}
+
+/**
+ * Clean a filename into a human-readable title by removing date stamps and version tags.
+ */
+function cleanFileName(mp3: string): string {
+  return mp3
+    .replace(/\.mp3$/i, "")
+    .replace(/\s*D\d{8}\s*T\d{4}[AP]M\s*/gi, "")
+    .replace(/\s*V\d+\s*$/i, "")
+    .trim();
+}
+
+/**
+ * Parse metadata from Suno AI format TXT file content.
+ *
+ * FIX: Handles the actual Suno AI format:
+ *   - Lyrics section is "--- Lyrics ---" (not "Lyrics:")
+ *   - Duration comes from the Raw API JSON block (metadata.duration)
+ *   - Cover art prefers image_large_url over image_url
+ *   - Artist comes from display_name in the JSON block
  */
 function parseMetadataContent(content: string): {
   title?: string;
@@ -357,99 +412,127 @@ function parseMetadataContent(content: string): {
   lyrics?: string;
   coverArtUrl?: string;
 } {
-  const lines = content.split("\n");
   let title: string | undefined;
   let artist: string | undefined;
   let year: number | undefined;
   let duration: number | undefined;
   let lyrics = "";
   let coverArtUrl: string | undefined;
+
+  // ── 1. Try to parse the embedded Raw API JSON block first (most reliable) ──
+  const jsonMatch = content.match(/---\s*Raw API Response\s*---\s*(\{[\s\S]*\})/);
+  if (jsonMatch) {
+    try {
+      const raw = JSON.parse(jsonMatch[1]);
+
+      title = title || raw.title;
+      artist = artist || raw.display_name || raw.handle;
+      coverArtUrl = raw.image_large_url || raw.image_url;
+
+      if (raw.created_at) {
+        year = new Date(raw.created_at).getFullYear();
+      }
+
+      const meta = raw.metadata || {};
+      // Duration is nested inside metadata in Suno's format
+      if (typeof meta.duration === "number") {
+        duration = meta.duration;
+      }
+      // Lyrics / prompt from metadata
+      if (meta.prompt && !lyrics) {
+        lyrics = meta.prompt;
+      }
+    } catch {
+      // fall through to manual parsing
+    }
+  }
+
+  // ── 2. Manual line-by-line parsing for header fields ──
+  const lines = content.split("\n");
   let inLyrics = false;
+  let manualLyrics = "";
 
   for (const line of lines) {
     const trimmed = line.trim();
 
-    // Title extraction
-    if (trimmed.startsWith("Title:") || trimmed.startsWith("title:")) {
-      title = trimmed.replace(/^[Tt]itle:\s*/, "").trim();
+    if (!trimmed) {
+      if (inLyrics) manualLyrics += "\n";
+      continue;
     }
-    // Artist extraction
-    else if (trimmed.startsWith("Artist:") || trimmed.startsWith("artist:")) {
-      artist = trimmed.replace(/^[Aa]rtist:\s*/, "").trim();
-    }
-    // Year extraction
-    else if (trimmed.startsWith("Year:") || trimmed.startsWith("year:")) {
-      const yearStr = trimmed.replace(/^[Yy]ear:\s*/, "").trim();
-      const parsed = parseInt(yearStr);
-      if (!isNaN(parsed)) year = parsed;
-    }
-    // Duration extraction
-    else if (trimmed.startsWith("Duration:") || trimmed.startsWith("duration:")) {
-      const durStr = trimmed.replace(/^[Dd]uration:\s*/, "").trim();
-      const parsed = parseFloat(durStr);
-      if (!isNaN(parsed)) duration = parsed;
-    }
-    // Cover art URL
-    else if (trimmed.includes("image_url") || trimmed.includes("image_large_url")) {
-      const urlMatch = trimmed.match(/https?:\/\/[^\s"',]+/);
-      if (urlMatch) coverArtUrl = urlMatch[0];
-    }
-    // Lyrics section
-    else if (trimmed === "Lyrics:" || trimmed === "[Lyrics]" || trimmed.startsWith("Lyrics:")) {
+
+    // Stop manual parsing when we hit the Raw API block
+    if (trimmed.startsWith("--- Raw API Response")) break;
+
+    if (/^[Tt]itle:\s*/.test(trimmed)) {
+      if (!title) title = trimmed.replace(/^[Tt]itle:\s*/, "").trim();
+    } else if (/^[Aa]rtist:\s*/.test(trimmed)) {
+      if (!artist) artist = trimmed.replace(/^[Aa]rtist:\s*/, "").trim();
+    } else if (/^[Yy]ear:\s*/.test(trimmed)) {
+      if (!year) {
+        const y = parseInt(trimmed.replace(/^[Yy]ear:\s*/, "").trim());
+        if (!isNaN(y)) year = y;
+      }
+    } else if (/^[Dd]uration:\s*/.test(trimmed)) {
+      if (!duration) {
+        const d = parseFloat(trimmed.replace(/^[Dd]uration:\s*/, "").trim());
+        if (!isNaN(d)) duration = d;
+      }
+    } else if (/^Cover Art URL:\s*/i.test(trimmed)) {
+      if (!coverArtUrl) {
+        const urlMatch = trimmed.match(/https?:\/\/[^\s"',]+/);
+        if (urlMatch) coverArtUrl = urlMatch[0];
+      }
+    } else if (/^---\s*Lyrics\s*---$/i.test(trimmed)) {
+      // ✅ FIX: the actual section header is "--- Lyrics ---"
       inLyrics = true;
-      const afterLabel = trimmed.replace(/^Lyrics:\s*/, "").trim();
-      if (afterLabel) lyrics += afterLabel + "\n";
-    }
-    // End of lyrics section
-    else if (inLyrics && (trimmed.startsWith("---") || trimmed.startsWith("==="))) {
+    } else if (inLyrics && /^---/.test(trimmed)) {
       inLyrics = false;
-    }
-    // Collect lyrics lines
-    else if (inLyrics && trimmed) {
-      lyrics += trimmed + "\n";
+    } else if (inLyrics) {
+      manualLyrics += trimmed + "\n";
     }
   }
 
-  // If no explicit lyrics section, try to find lyrics between markers
-  if (!lyrics) {
-    const lyricsMatch = content.match(/\[Verse[^\]]*\][\s\S]*?(?=\n\n\n|\n---|\n===|$)/i);
-    if (lyricsMatch) {
-      lyrics = lyricsMatch[0].trim();
-    }
+  // Use manual lyrics if JSON didn't provide them
+  if (!lyrics && manualLyrics.trim()) {
+    lyrics = manualLyrics.trim();
   }
 
-  return { title, artist, year, duration, lyrics: lyrics.trim(), coverArtUrl };
+  return {
+    title,
+    artist,
+    year,
+    duration,
+    lyrics: lyrics.trim() || undefined,
+    coverArtUrl,
+  };
 }
 
 /**
- * Infer genre from lyrics and title
+ * Infer genre from lyrics and title using keyword matching.
  */
 function inferGenreFromContent(lyrics: string, title: string): string {
   const text = `${title} ${lyrics}`.toLowerCase();
+  const genreKeywords: [string, string[]][] = [
+    ["Hip-Hop", ["rap", "hip hop", "hip-hop", "bars", "flow", "spit", "rhyme", "beat", "hood", "street", "hustle", "grind", "mic"]],
+    ["R&B", ["r&b", "rnb", "soul", "smooth", "groove", "hold me", "love me"]],
+    ["Rock", ["rock", "guitar", "drums", "loud", "scream", "metal", "punk", "electric", "emo"]],
+    ["Pop", ["pop", "catchy", "hook", "dance", "party", "tonight", "summer", "upbeat"]],
+    ["Country", ["country", "truck", "beer", "cowboy", "southern", "farm", "dirt road"]],
+    ["Jazz", ["jazz", "swing", "blues", "saxophone", "trumpet", "improvise"]],
+    ["Electronic", ["electronic", "edm", "synth", "bass drop", "techno", "house", "rave"]],
+    ["Reggae", ["reggae", "rasta", "jamaica", "dub", "riddim"]],
+    ["Latin", ["latin", "salsa", "reggaeton", "bachata", "cumbia"]],
+    ["Gospel", ["gospel", "praise", "worship", "lord", "jesus", "faith", "blessed", "hallelujah"]],
+    ["Classical", ["classical", "orchestra", "symphony", "piano", "violin"]],
+    ["Acoustic", ["acoustic", "folk", "singer-songwriter", "ballad", "unplugged"]],
+    ["Indie", ["indie", "alternative", "lo-fi"]],
+  ];
 
-  const genreKeywords: Record<string, string[]> = {
-    "Hip Hop": ["rap", "hip hop", "bars", "flow", "spit", "rhyme", "beat", "hood", "street", "hustle", "grind"],
-    "R&B": ["r&b", "rnb", "soul", "smooth", "groove", "baby", "love me", "hold me"],
-    "Pop": ["pop", "catchy", "hook", "dance", "party", "tonight", "summer"],
-    "Rock": ["rock", "guitar", "drums", "loud", "scream", "metal", "punk", "electric"],
-    "Country": ["country", "truck", "beer", "cowboy", "southern", "farm", "dirt road"],
-    "Jazz": ["jazz", "swing", "blues", "saxophone", "trumpet", "improvise"],
-    "Electronic": ["electronic", "edm", "synth", "bass drop", "techno", "house", "rave"],
-    "Reggae": ["reggae", "rasta", "jamaica", "dub", "riddim"],
-    "Latin": ["latin", "salsa", "reggaeton", "bachata", "cumbia"],
-    "Gospel": ["gospel", "praise", "worship", "lord", "jesus", "faith", "blessed", "hallelujah"],
-    "Classical": ["classical", "orchestra", "symphony", "piano", "violin"],
-    "Indie": ["indie", "alternative", "lo-fi", "acoustic"],
-  };
-
-  for (const [genre, keywords] of Object.entries(genreKeywords)) {
-    for (const keyword of keywords) {
-      if (text.includes(keyword)) {
-        return genre;
-      }
+  for (const [genre, keywords] of genreKeywords) {
+    for (const kw of keywords) {
+      if (text.includes(kw)) return genre;
     }
   }
-
   return "Other";
 }
 
